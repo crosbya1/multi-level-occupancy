@@ -10,13 +10,13 @@
   (additive, interactive, and total human footprint) at each scale using
   all coefficients and interactions on the block-level portion of the
   model, with specific variables depending on which model type was being
-  estimated. Similar to Gerber et al. \[-@Gerber2015\] and Stevens and
-  Conway \[-@Stevens2019\], we searching over 50 potential values of
-  prior variance for the Laplace distribution ranging from 0.1–5 on the
-  log scale, which translated to ~1.1–148 when transformed. We selected
-  the optimal prior for each model type at each scale by comparing
-  models using Watanabe-Akaike Information Criterion \[WAIC,
-  @Watanabe2010\].](#we-implemented-the-bayesian-lasso-procedure-for-each-model-type-additive-interactive-and-total-human-footprint-at-each-scale-using-all-coefficients-and-interactions-on-the-block-level-portion-of-the-model-with-specific-variables-depending-on-which-model-type-was-being-estimated.-similar-to-gerber-et-al.--gerber2015-and-stevens-and-conway--stevens2019-we-searching-over-50-potential-values-of-prior-variance-for-the-laplace-distribution-ranging-from-0.15-on-the-log-scale-which-translated-to-1.1148-when-transformed.-we-selected-the-optimal-prior-for-each-model-type-at-each-scale-by-comparing-models-using-watanabe-akaike-information-criterion-waic-watanabe2010.)
+  estimated. Similar to Gerber et al. (2015) and Stevens and Conway
+  (2019), we searching over 50 potential values of prior variance for
+  the Laplace distribution ranging from 0.1–5 on the log scale, which
+  translated to ~1.1–148 when transformed. We selected the optimal prior
+  for each model type at each scale by comparing models using
+  Watanabe-Akaike Information Criterion (WAIC, Watanabe
+  2010).](#we-implemented-the-bayesian-lasso-procedure-for-each-model-type-additive-interactive-and-total-human-footprint-at-each-scale-using-all-coefficients-and-interactions-on-the-block-level-portion-of-the-model-with-specific-variables-depending-on-which-model-type-was-being-estimated.-similar-to-gerber-et-al.--gerber2015-and-stevens-and-conway--stevens2019-we-searching-over-50-potential-values-of-prior-variance-for-the-laplace-distribution-ranging-from-0.15-on-the-log-scale-which-translated-to-1.1148-when-transformed.-we-selected-the-optimal-prior-for-each-model-type-at-each-scale-by-comparing-models-using-watanabe-akaike-information-criterion-waic-watanabe2010.)
 - [6 For implementation in JAGS, we specified the double exponential
   distribution as the prior distribution for all block-level variables
   as:](#for-implementation-in-jags-we-specified-the-double-exponential-distribution-as-the-prior-distribution-for-all-block-level-variables-as)
@@ -33,7 +33,7 @@
 # 2 Overview
 
 The Objective of this document is to describe, and demonstrate how to
-run, the scale integrated occupancy model described in @Crosby2023.
+run, the scale integrated occupancy model described in Crosby et al.
 
 # 3 Importing the Big Grid data
 
@@ -110,7 +110,7 @@ cat("
 
 ## 4.2 **Details on Bayesian Lasso implementation**
 
-# 5 We implemented the Bayesian Lasso procedure for each model type (additive, interactive, and total human footprint) at each scale using all coefficients and interactions on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. \[-@Gerber2015\] and Stevens and Conway \[-@Stevens2019\], we searching over 50 potential values of prior variance for the Laplace distribution ranging from 0.1–5 on the log scale, which translated to ~1.1–148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion \[WAIC, @Watanabe2010\].
+# 5 We implemented the Bayesian Lasso procedure for each model type (additive, interactive, and total human footprint) at each scale using all coefficients and interactions on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. ([2015](#ref-gerber2015)) and Stevens and Conway ([2019](#ref-Stevens2019)), we searching over 50 potential values of prior variance for the Laplace distribution ranging from 0.1–5 on the log scale, which translated to ~1.1–148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion (WAIC, [Watanabe 2010](#ref-watanabe2010)).
 
  
 
@@ -133,7 +133,40 @@ mod.lam \<- lambda\[lam\]
 
 # 10 References
 
-<div id="refs">
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-Crosby" class="csl-entry">
+
+Crosby AD, Leston L, Bayne EM, et al Domains of scale in cumulative
+effects of energy sector development on boreal birds.
+https://doi.org/<https://doi.org/10.21203/rs.3.rs-2191857/v1>
+
+</div>
+
+<div id="ref-gerber2015" class="csl-entry">
+
+Gerber BD, Kendall WL, Hooten MB, et al (2015) Optimal population
+prediction of sandhill crane recruitment based on climate-mediated
+habitat limitations. Journal of Animal Ecology 84:1299–1310.
+<https://doi.org/10.1111/1365-2656.12370>
+
+</div>
+
+<div id="ref-Stevens2019" class="csl-entry">
+
+Stevens BS, Conway CJ (2019) Predicting species distributions: unifying
+model selection and scale optimization for multi‐scale occupancy models.
+Ecosphere 10:e02748. <https://doi.org/10.1002/ecs2.2748>
+
+</div>
+
+<div id="ref-watanabe2010" class="csl-entry">
+
+Watanabe S (2010) [Asymptotic Equivalence of Bayes Cross Validation and
+Widely Applicable Information Criterion in Singular Learning
+Theory](https://www.jmlr.org/papers/volume11/watanabe10a/watanabe10a.pdf)
+
+</div>
 
 </div>
 

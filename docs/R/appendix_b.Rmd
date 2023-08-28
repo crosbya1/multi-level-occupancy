@@ -1,15 +1,7 @@
 ---
 # title: 
 
-bibliography: C:/Users/crosby/Documents/RepResRef.bib
-csl: common/journal-of-applied-ecology.csl
-
-output: 
-  word_document:
-       reference_docx: common/word-styles-reference-appendix.docx
-
-fontsize: 12pt
-mainfont: Times New Roman
+# bibliography: C:/Users/crosby/Documents/RepResRef.bib
 
 fig_caption: yes
 
@@ -89,7 +81,7 @@ cat("
 \  
 
 ## **Details on Bayesian Lasso implementation**     
-# We implemented the Bayesian Lasso procedure for each model type (additive, interactive, and total human footprint) at each scale using all coefficients and interactions on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. [-@Gerber2015] and Stevens and Conway [-@Stevens2019], we searching over 50 potential values of prior variance for the Laplace distribution ranging from 0.1--5 on the log scale, which translated to ~1.1--148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion [WAIC, @Watanabe2010]. 
+# We implemented the Bayesian Lasso procedure for each model type (additive, interactive, and total human footprint) at each scale using all coefficients and interactions on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. [-@gerber2015] and Stevens and Conway [-@Stevens2019], we searching over 50 potential values of prior variance for the Laplace distribution ranging from 0.1--5 on the log scale, which translated to ~1.1--148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion [WAIC, @watanabe2010]. 
 \  
   
 

@@ -8,9 +8,9 @@ output:
     toc: TRUE
     toc_depth: 2
     number_sections: TRUE
-#bibliography: library.bib
-#citation-style: ../../MendeleyBib/CitationStyles/nature.csl
-#citation-style: https://www.zotero.org/styles/elsevier-harvard
+bibliography: docs/scale-integration-library.json
+citation-style: docs/landscape-ecology.csl
+
 link-citations: true
 github-repo: https://github.com/crosbya1/scale-integrated-occupancy.git
 description: "Description and code for running a scale-integrated occupancy model with Bayesian Lasso for variable selection"
@@ -36,7 +36,7 @@ library(knitr)
 
 
 # Overview
-The Objective of this document is to describe, and demonstrate how to run, the scale integrated occupancy model described in @Crosby2023. 
+The Objective of this document is to describe, and demonstrate how to run, the scale integrated occupancy model described in @Crosby. 
 
 
 
