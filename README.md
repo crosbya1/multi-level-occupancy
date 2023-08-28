@@ -1,47 +1,17 @@
-- [1 Overview](#overview)
-- [2 Overview](#overview-1)
-- [3 Importing the Big Grid data](#importing-the-big-grid-data)
-- [4 **Appendix B: Hierarchical model code and details on Bayesian
-  Lasso**](#appendix-b-hierarchical-model-code-and-details-on-bayesian-lasso)
-  - [4.1 Hierarchical model code](#hierarchical-model-code)
-  - [4.2 **Details on Bayesian Lasso
-    implementation**](#details-on-bayesian-lasso-implementation)
-- [5 We implemented the Bayesian Lasso procedure for each model type
-  (additive, interactive, and total human footprint) at each scale using
-  all coefficients and interactions on the block-level portion of the
-  model, with specific variables depending on which model type was being
-  estimated. Similar to Gerber et al. (2015) and Stevens and Conway
-  (2019), we searching over 50 potential values of prior variance for
-  the Laplace distribution ranging from 0.1–5 on the log scale, which
-  translated to ~1.1–148 when transformed. We selected the optimal prior
-  for each model type at each scale by comparing models using
-  Watanabe-Akaike Information Criterion (WAIC, Watanabe
-  2010).](#we-implemented-the-bayesian-lasso-procedure-for-each-model-type-additive-interactive-and-total-human-footprint-at-each-scale-using-all-coefficients-and-interactions-on-the-block-level-portion-of-the-model-with-specific-variables-depending-on-which-model-type-was-being-estimated.-similar-to-gerber-et-al.--gerber2015-and-stevens-and-conway--stevens2019-we-searching-over-50-potential-values-of-prior-variance-for-the-laplace-distribution-ranging-from-0.15-on-the-log-scale-which-translated-to-1.1148-when-transformed.-we-selected-the-optimal-prior-for-each-model-type-at-each-scale-by-comparing-models-using-watanabe-akaike-information-criterion-waic-watanabe2010.)
-- [6 For implementation in JAGS, we specified the double exponential
-  distribution as the prior distribution for all block-level variables
-  as:](#for-implementation-in-jags-we-specified-the-double-exponential-distribution-as-the-prior-distribution-for-all-block-level-variables-as)
-- [7 ‘beta.block\[i\] ~ ddexp(0, lambda)’ (see model code above), where
-  lambda was the prior variance value for each realization of the
-  model.](#beta.blocki-ddexp0-lambda-see-model-code-above-where-lambda-was-the-prior-variance-value-for-each-realization-of-the-model.)
-- [8 We generated the lamdba values
-  as:](#we-generated-the-lamdba-values-as)
-- [9 **References**](#references)
-- [10 References](#references-1)
+# Running a scale-integrated occupancy model with Bayesian lasso for variable selection
 
-# 1 Overview
-
-# 2 Overview
+## Overview
 
 The Objective of this document is to describe, and demonstrate how to
 run, the scale integrated occupancy model described in Crosby et al.
 
-# 3 Importing the Big Grid data
+## Importing the Big Grid data
 
-# 4 **Appendix B: Hierarchical model code and details on Bayesian Lasso**
+# **Appendix B: Hierarchical model code and details on Bayesian Lasso**
 
  
 
-## 4.1 Hierarchical model code
+## Hierarchical model code
 
 ``` r
 # This model estimates point-level occupancy probability as a joint 
@@ -108,19 +78,19 @@ cat("
 
  
 
-## 4.2 **Details on Bayesian Lasso implementation**
+## **Details on Bayesian Lasso implementation**
 
-# 5 We implemented the Bayesian Lasso procedure for each model type (additive, interactive, and total human footprint) at each scale using all coefficients and interactions on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. ([2015](#ref-gerber2015)) and Stevens and Conway ([2019](#ref-Stevens2019)), we searching over 50 potential values of prior variance for the Laplace distribution ranging from 0.1–5 on the log scale, which translated to ~1.1–148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion (WAIC, [Watanabe 2010](#ref-watanabe2010)).
-
- 
-
-# 6 For implementation in JAGS, we specified the double exponential distribution as the prior distribution for all block-level variables as:
-
-# 7 ‘beta.block\[i\] ~ ddexp(0, lambda)’ (see model code above), where lambda was the prior variance value for each realization of the model.
+# We implemented the Bayesian Lasso procedure for each model type (additive, interactive, and total human footprint) at each scale using all coefficients and interactions on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. ([2015](#ref-gerber2015)) and Stevens and Conway ([2019](#ref-Stevens2019)), we searching over 50 potential values of prior variance for the Laplace distribution ranging from 0.1–5 on the log scale, which translated to ~1.1–148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion (WAIC, [Watanabe 2010](#ref-watanabe2010)).
 
  
 
-# 8 We generated the lamdba values as:
+# For implementation in JAGS, we specified the double exponential distribution as the prior distribution for all block-level variables as:
+
+# ‘beta.block\[i\] ~ ddexp(0, lambda)’ (see model code above), where lambda was the prior variance value for each realization of the model.
+
+ 
+
+# We generated the lamdba values as:
 
 log.lambda=seq(0.1, 5, length = 50)  
 lambda \<- exp(log.lambda)  
@@ -129,9 +99,7 @@ mod.lam \<- lambda\[lam\]
 
  
 
-# 9 **References**
-
-# 10 References
+## References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 

@@ -1,13 +1,13 @@
 ---
 title: "Running a scale-integrated occupancy model with Bayesian lasso for variable selection."
-author: "Andy Crosby"
+author: "Andrew D. Crosby"
 site: bookdown::bookdown_site
 output: 
   md_document:
     variant: gfm
-    toc: TRUE
+    toc: FALSE
     toc_depth: 2
-    number_sections: TRUE
+    number_sections: FALSE
 bibliography: docs/scale-integration-library.json
 citation-style: docs/landscape-ecology.csl
 
@@ -15,8 +15,6 @@ link-citations: true
 github-repo: https://github.com/crosbya1/scale-integrated-occupancy.git
 description: "Description and code for running a scale-integrated occupancy model with Bayesian Lasso for variable selection"
 ---
-
-# Overview
 
 ```{r GlobalOptions, echo=FALSE}
 options(bookdown.render.file_scope = FALSE, knitr.duplicate.label = "allow") 
@@ -33,18 +31,18 @@ library(kableExtra)
 library(knitr)
 ```
 
+# Running a scale-integrated occupancy model with Bayesian lasso for variable selection
 
-
-# Overview
+## Overview
 The Objective of this document is to describe, and demonstrate how to run, the scale integrated occupancy model described in @Crosby. 
 
 
 
-# Importing the Big Grid data
+## Importing the Big Grid data
 ```{r child = 'docs/R/appendix_b.Rmd'}
 ```
 
-# References
+## References
 
 
 <div id="refs"></div>
