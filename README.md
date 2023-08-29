@@ -1,14 +1,11 @@
 # Appendix B: Running a scale-integrated occupancy model with Bayesian lasso for variable selection
 
-Supporting information for:
-<center>
-
+Supporting information for:  
 Domains of scale in cumulative effects of energy sector development on
-boreal birds  
+boreal birds
+
 Andrew D. Crosby, Lionel Leston, Erin M. Bayne, Péter Sólymos, C. Lisa
 Mahon, Judith D. Toms, Teegan D.S. Docherty, Samantha J. Song
-
-</center>
 
 ## Overview
 
@@ -36,12 +33,102 @@ integrated occupancy model using Bayesian lasso for variable selection.
 
 ### Files:
 
-- **big-grid-point-data.Rdata**: point-level habitat data and bird
-  detections, and survey-level detection variables.
+- **big-grid-zenodo-data.Rdata**: Post-processed data used to fit the
+  models in this analysis
 
-- **big-grid-block-data.Rdata**: block-level human footprint data.
+These data can be downloaded from the Zenodo repository at:
 
-These data can be downloaded form the Zenodo repository at:
+To be consistent with the GitHub repository (), when following this
+tutorial in R, create a directory named “docs” within your R working
+directory to store the data in.
+
+## Importing and processing the Big Grid data
+
+We will run this example on a small amount of data, using Ovenbird
+(*Seiurus aurocapilla*), using 20 blocks at the 2x2 scale.
+
+``` r
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+    ## ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+    ## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+    ## ✔ purrr     1.0.2     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter()     masks stats::filter()
+    ## ✖ dplyr::group_rows() masks kableExtra::group_rows()
+    ## ✖ dplyr::lag()        masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+# Load the data
+load("docs/big-grid-zenodo-data.Rdata")
+
+# Select the species
+spp_code <- "OVEN" 
+
+# specify the number of blocks 
+nblock <- 20 
+
+# Specify the 2x2 scale. 
+scale <- 2 
+
+# Get the species detection data
+spp_point <- bg_pa[, c(1:2, which(colnames(bg_pa) == spp_code))] 
+
+# Reformat the data to 'wide form' 
+spp_pt <- spp_point %>% spread(survey, spp_code) 
+spp_pt <- spp_pt[match(bg_nsurv_veg$SS, spp_pt$SS), 1:5] 
+
+# Create the test dataset
+set.seed(1234)
+test <- sort(sample(1:nrow(blocks_veghf_2[[scale]]), nblock, replace = FALSE))
+block.test <- blocks_veghf_2[[scale]][test, ]
+
+pt.test <- point.block[[scale]][which(point.block[[scale]]$block %in% block.test$blockID), ]
+length(which(duplicated(pt.test$ss))) #Make sure there are no duplicates
+```
+
+    ## [1] 2
+
+``` r
+# Get the dominant vegetation and weighted mean forest age for each point
+pt_cov.test <- do.call(rbind, lapply(1:nlevels(as.factor(pt.test$block)), function(x){
+  d <- pt.test[which(pt.test$block == levels(as.factor(pt.test$block))[x]), ]
+  d1 <- data.frame(d, veghf_dom[match(d$ss, rownames(veghf_dom)), ])
+  return(d1)
+}))
+
+# Get the grid, point, and block information for each point
+pt_block.test <- pt_cov.test[, c("ss", "grid", "point", "block")]
+
+# Get the detection covariates
+det_cov.test <- array(NA, dim = c(nrow(pt_block.test), dim(det.var_veg)[2:3]))
+dimnames(det_cov.test) <- list(pt_block.test$ss, dimnames(det.var_veg)[[2]], dimnames(det.var_veg)[[3]])
+for(i in 1:nrow(pt_cov.test)){
+  d <- which(rownames(det.var_veg) == rownames(det_cov.test)[i])
+  det_cov.test[i, , ] <- det.var_veg[d, , ]
+}
+
+# Get the detection data and number of surveys for the points included in the analysis
+spp.test <- do.call(rbind, lapply(1:nrow(pt_cov.test), function(x) spp_pt[which(spp_pt$SS == pt_cov.test$ss[x]), ]))
+
+nsurv.test <- do.call(rbind, lapply(1:nrow(pt_cov.test), function(x) bg_nsurv_veg[which(bg_nsurv_veg$SS == pt_cov.test$ss[x]), ]))
+all.equal(nsurv.test$SS, pt_block.test$ss) # Make sure the data mathces up
+```
+
+    ## [1] TRUE
+
+``` r
+# Get the human footprint data for the blocks included in the analysis
+block_cov.test <- as.matrix(block.test[, grep("seismic|widelin|wells|industry", colnames(block.test))])
+
+
+save(block.test, block_cov.test, pt_cov.test, spp_pt, spp.test, det.var_veg, det_cov.test, nsurv.test, file = "docs/lasso_data.Rdata")
+```
 
 ## Description of model code
 
@@ -57,6 +144,7 @@ These data can be downloaded form the Zenodo repository at:
 sink("block_occupancy_lasso.txt")
 cat("
   model{
+
   #Priors on block-level coefficients (for Bayesian Lasso, uses double exponential distribution)
   beta.block[1] ~ dnorm(0, 1)
   for(i in 2:n.beta.block){
@@ -73,6 +161,7 @@ cat("
   for(i in 1:n.beta.p){
     beta.p[i] ~ dnorm(0, 0.1)
   }
+  
   
   # Likelihood on mean within-block occupancy probability
   for(i in 1:n.block){
@@ -110,6 +199,7 @@ cat("
   e.count.total <- sum(zc[]) # Total number of occupied points 
 }
 ", fill = TRUE)
+sink()
 ```
 
  
@@ -118,36 +208,116 @@ cat("
 
 # ‘beta.block\[i\] ~ ddexp(0, lambda)’ (see model code above), where lambda was the prior variance value for each realization of the model.
 
- 
-
-# We generated the lamdba values as:
-
-log.lambda=seq(0.1, 5, length = 50)  
-lambda \<- exp(log.lambda)  
-lam \<- as.numeric() \# Which lamdba value to choose (1-50)  
-mod.lam \<- lambda\[lam\]
-
- 
-
-## Importing the Big Grid data
-
 ## Bayesian Lasso implementation
 
  
 
-## **Details on Bayesian Lasso implementation**
+### **Details on Bayesian Lasso implementation**
 
-We implemented the Bayesian Lasso procedure for each model type
-(additive, interactive, and total human footprint) at each scale using
-all coefficients and interactions on the block-level portion of the
-model, with specific variables depending on which model type was being
-estimated. Similar to Gerber et al. ([2015](#ref-gerber2015)) and
-Stevens and Conway ([2019](#ref-Stevens2019)), we searching over 50
-potential values of prior variance for the Laplace distribution ranging
-from 0.1–5 on the log scale, which translated to ~1.1–148 when
-transformed. We selected the optimal prior for each model type at each
-scale by comparing models using Watanabe-Akaike Information Criterion
-(WAIC, [Watanabe 2010](#ref-watanabe2010)).  
+We implemented the Bayesian Lasso procedure for coefficients on the
+block-level portion of the model, with specific variables depending on
+which model type was being estimated. Similar to Gerber et al.
+([2015](#ref-gerber2015)) and Stevens and Conway
+([2019](#ref-Stevens2019)), we searched over 50 potential values of
+prior variance for the Laplace distribution ranging from 0.1–5 on the
+log scale, which translated to ~1.1–148 when transformed. We selected
+the optimal prior for each model type at each scale by comparing models
+using Watanabe-Akaike Information Criterion (WAIC, [Watanabe
+2010](#ref-watanabe2010)).
+
+ 
+
+For this demonstration, we will limit the lasso implementation to 10
+values of the prior variance, as the models are run separately for each
+value of the variance. For simplicity, we will use total human footprint
+as the only block-level covariate. In the full analysis, these models
+were run in parallel on a high performance computing system (Digital
+Research Alliance of Canada, formerly Compute Canada).
+
+``` r
+# Load the libraries 
+library(jagsUI)
+library(loo) 
+
+# Load the data
+load("docs/lasso_data.Rdata")
+
+block.cov <- data.frame(total.hf = rowSums(block_cov.test))
+
+# Create the block-level model matrix
+cov.block <- model.matrix(~ ., data = data.frame(block.cov))
+
+# Create teh point-level model matrix, with forest age scaled 
+pt.cov <- data.frame(age = scale(pt_cov.test$age), pt_cov.test[, grep("dom", colnames(pt_cov.test))])
+cov.point <- model.matrix(~ as.matrix(pt.cov))
+
+# Create the array of detection covariates
+cov.p <- det_cov.test[, , 1:3] 
+
+# Set the lambda values for lasso testing
+nlam <- 10
+log.lambda=seq(0.1, 5, length = nlam)
+lambda <- exp(log.lambda)
+```
+
+First, run a single model with the lowest lambda value
+
+``` r
+scale <- 2
+ni <- 1000
+nb <- 500
+nt <- 1
+nc <- 3
+
+
+mod.lam <- lambda[i]  # The lambda value to use
+
+
+params_1 <- c("beta.block", "beta.point", "beta.p", "l.score", "lprob.y")
+zst <- apply(spp.test[, -1], 1, function(x) max(x, na.rm = T))  
+zbst <- rep(1, nrow(cov.point))
+
+inits <- function() {list(zp = zst, zb = zbst, beta.block = rnorm(ncol(cov.block)), beta.point = rnorm(ncol(cov.point)), beta.p = rnorm(dim(cov.p)[3]))}    
+
+data <- list(y = spp.test[, -1], cov.p = cov.p, cov.point = cov.point, cov.block = cov.block, n.surv = nsurv.test$nsurv, n.site = nrow(spp.test), n.block = nrow(cov.block), n.beta.block = ncol(cov.block), n.beta.point = ncol(cov.point), n.beta.p = dim(cov.p)[3], n.scale = scale^2, block = as.numeric(as.factor(block.test$blockID)), point.block = as.numeric(as.factor(pt_cov.test$block)), indicator = zst, lambda = mod.lam)
+
+system.time({
+  out <- jags(data = data, inits = inits, parameters.to.save =  params_1, 
+              model.file =  "block_occupancy_lasso.txt", n.chains = nc, n.thin = nt, 
+              n.iter = ni, n.burnin = nb, parallel = TRUE)
+})
+```
+
+Next, put it into a loop and save the log scores to find the lambda
+values that best fit the data
+
+``` r
+lasso_scores <- lapply(1:length(lambda), function(i){
+  mod.lam <- lambda[i]  # The lambda value to use
+  
+  
+  params_1 <- c("beta.block", "beta.point", "beta.p", "l.score", "lprob.y")
+  zst <- apply(spp.test[, -1], 1, function(x) max(x, na.rm = T))  
+  zbst <- rep(1, nrow(cov.point))
+  
+  inits <- function() {list(zp = zst, zb = zbst, beta.block = rnorm(ncol(cov.block)), beta.point = rnorm(ncol(cov.point)), beta.p = rnorm(dim(cov.p)[3]))}    
+  
+  data <- list(y = spp.test[, -1], cov.p = cov.p, cov.point = cov.point, cov.block = cov.block, n.surv = nsurv.test$nsurv, n.site = nrow(spp.test), n.block = nrow(cov.block), n.beta.block = ncol(cov.block), n.beta.point = ncol(cov.point), n.beta.p = dim(cov.p)[3], n.scale = scale^2, block = as.numeric(as.factor(block.test$blockID)), point.block = as.numeric(as.factor(pt_cov.test$block)), indicator = zst, lambda = mod.lam)
+  
+  system.time({
+    out <- jags(data = data, inits = inits, parameters.to.save =  params_1, 
+                model.file =  "block_occupancy_lasso.txt", n.chains = nc, n.thin = nt, 
+                n.iter = ni, n.burnin = nb, parallel = TRUE)
+  })
+  
+  Rhats <- out$Rhat$beta.block
+  log.score <- out$mean$l.score
+  waic <- waic(out$sims.list$lprob.y)
+  
+  return(list(waic = waic$estimates[3, 1], log.score = log.score, Rhats = Rhats))
+  
+})
+```
 
 ## References
 

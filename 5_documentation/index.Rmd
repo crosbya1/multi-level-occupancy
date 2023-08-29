@@ -31,28 +31,28 @@ library(kableExtra)
 library(knitr)
 ```
 
-# Appendix B: Running a scale-integrated occupancy model with Bayesian lasso for variable selection 
-Supporting information for: 
-<center> 
+# Appendix B: Running a scale-integrated occupancy model with Bayesian lasso for variable selection  
 
+Supporting information for:   
 Domains of scale in cumulative effects of energy sector development on boreal birds  
-Andrew D. Crosby, Lionel Leston, Erin M. Bayne, Péter Sólymos, C. Lisa Mahon, Judith D. Toms, Teegan D.S. Docherty, Samantha J. Song 
 
-</center> 
+Andrew D. Crosby, Lionel Leston, Erin M. Bayne, Péter Sólymos, C. Lisa Mahon, Judith D. Toms, Teegan D.S. Docherty, Samantha J. Song   
+
 
 ## Overview
 ```{r child = 'docs/R/01_overview.Rmd'}
 ```
 
 
-## Description of model code
+## Importing and processing the Big Grid data 
+```{r child = 'docs/R/data-processing.Rmd'}
+```
+
+## Description of model code 
 ```{r child = 'docs/R/hierarchical-model-code.Rmd'}
 ```
 
-## Importing the Big Grid data
-
-
-## Bayesian Lasso implementation
+## Bayesian Lasso implementation 
 ```{r child = 'docs/R/lasso-implementation.Rmd'}
 ```
 

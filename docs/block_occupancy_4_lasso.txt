@@ -1,24 +1,9 @@
----
-# title: 
-
-output: github_document
-fig_caption: yes
-
-
----
-
-
-\     
-
-## Hierarchical model code  
-```{r, eval = F, message = F, warning = F}
 # This model estimates point-level occupancy probability as a joint 
 # probability of block-level human footprint and point-level habitat, 
 # where blocks contain >= 1 point. 
 
-sink("block_occupancy_lasso.txt")
-cat("
-  model{
+
+model{
 
   #Priors on block-level coefficients (for Bayesian Lasso, uses double exponential distribution)
   beta.block[1] ~ dnorm(0, 1)
@@ -73,20 +58,4 @@ cat("
   l.score <- -2*sum(lprob.y[]) # Model likelihood estimate
   e.count.total <- sum(zc[]) # Total number of occupied points 
 }
-", fill = TRUE)
-sink()
-
-```
-
-\  
-
-# For implementation in JAGS, we specified the double exponential distribution as the prior distribution for all block-level variables as: 
-
-# 'beta.block[i] ~ ddexp(0, lambda)' (see model code above), where lambda was the prior variance value for each realization of the model. 
-
-
-
-
-
-
 
