@@ -39,9 +39,12 @@ The Objective of this document is to describe, and demonstrate how to run, the s
 
 
 ## Importing the Big Grid data
-```{r child = 'docs/R/appendix_b.Rmd'}
+```{r child = 'docs/R/hierarchical-model-code.Rmd'}
 ```
 
+## Bayesian Lasso implementation
+```{r child = 'docs/R/lasso-implementation.Rmd'}
+```
 ## References
 
 
