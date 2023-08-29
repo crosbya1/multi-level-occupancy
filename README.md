@@ -1,11 +1,49 @@
-# Running a scale-integrated occupancy model with Bayesian lasso for variable selection
+# Appendix B: Running a scale-integrated occupancy model with Bayesian lasso for variable selection
+
+Supporting information for:
+<center>
+
+Domains of scale in cumulative effects of energy sector development on
+boreal birds  
+Andrew D. Crosby, Lionel Leston, Erin M. Bayne, Péter Sólymos, C. Lisa
+Mahon, Judith D. Toms, Teegan D.S. Docherty, Samantha J. Song
+
+</center>
 
 ## Overview
 
-The Objective of this document is to describe, and demonstrate how to
-run, the scale integrated occupancy model described in Crosby et al.
+ 
 
-## Importing the Big Grid data
+This is Appendix B from the manuscript “Domains of scale in cumulative
+effects of energy sector development on boreal birds” by Crosby et al.
+submitted to the journal *Landscape Ecology*. The objective of this
+document is to describe, and demonstrate how to run, the scale
+integrated occupancy model using Bayesian lasso for variable selection.
+
+### Software requirements:
+
+- R for downloading and processing data, and running the models ([R Core
+  Development Team 2017](#ref-RCoreTeam2017)), downloadable from
+  <https://www.r-project.org/>
+
+- JAGS for estimating model parameters using Markov chain Monte
+  Carlo (MCMC) through the use of a Gibbs sampler ([Plummer
+  2003](#ref-Plummer2013)), downloadable from
+  <https://mcmc-jags.sourceforge.io/>
+
+- R extension packages: **tidyverse**, **jagsUI**, and **loo**. These
+  can be installed from R using the “install.packages” function
+
+### Files:
+
+- **big-grid-point-data.Rdata**: point-level habitat data and bird
+  detections, and survey-level detection variables.
+
+- **big-grid-block-data.Rdata**: block-level human footprint data.
+
+These data can be downloaded form the Zenodo repository at:
+
+## Description of model code
 
  
 
@@ -91,6 +129,8 @@ mod.lam \<- lambda\[lam\]
 
  
 
+## Importing the Big Grid data
+
 ## Bayesian Lasso implementation
 
  
@@ -127,6 +167,21 @@ Gerber BD, Kendall WL, Hooten MB, et al (2015) Optimal population
 prediction of sandhill crane recruitment based on climate-mediated
 habitat limitations. Journal of Animal Ecology 84:1299–1310.
 <https://doi.org/10.1111/1365-2656.12370>
+
+</div>
+
+<div id="ref-Plummer2013" class="csl-entry">
+
+Plummer M (2003) [JAGS: Just another gibbs
+sampler](http://mcmc-jags.sourceforge.net/)
+
+</div>
+
+<div id="ref-RCoreTeam2017" class="csl-entry">
+
+R Core Development Team (2017) [R: A language and environment for
+statistical computing](https://www.r-project.org/). R Foundation for
+Statistical Computing
 
 </div>
 

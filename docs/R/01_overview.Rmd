@@ -1,0 +1,33 @@
+---
+# title: 
+
+output: github_document
+fig_caption: yes
+
+
+---
+
+
+\ 
+
+This is Appendix B from the manuscript "Domains of scale in cumulative effects of energy sector development on boreal birds" by @Crosby. submitted to the journal *Landscape Ecology*. The objective of this document is to describe, and demonstrate how to run, the scale integrated occupancy model using Bayesian lasso for variable selection. 
+
+### Software requirements:  
+
+* R for downloading and processing data, and running the models [@RCoreTeam2017], downloadable from https://www.r-project.org/  
+
+* JAGS for estimating model parameters using Markov chain Monte Carlo (MCMC) through the use of a Gibbs sampler [@Plummer2013], downloadable from https://mcmc-jags.sourceforge.io/  
+
+* R extension packages: **tidyverse**, **jagsUI**, and **loo**. These can be installed from R using the "install.packages" function  
+
+
+### Files:  
+
+* **big-grid-point-data.Rdata**: point-level habitat data and bird detections, and survey-level detection variables. 
+
+* **big-grid-block-data.Rdata**: block-level human footprint data. 
+
+These data can be downloaded form the Zenodo repository at: 
+
+
+
