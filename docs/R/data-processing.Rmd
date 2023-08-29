@@ -9,7 +9,7 @@ fig_caption: yes
 
 We will run this example on a small amount of data, using Ovenbird (*Seiurus aurocapilla*), using 20 blocks at the 2x2 scale. 
 
-```{r}
+```{r, eval = F, message = F, warning = F}
 library(tidyverse)
 
 # Load the data

@@ -80,9 +80,9 @@ sink()
 
 \  
 
-# For implementation in JAGS, we specified the double exponential distribution as the prior distribution for all block-level variables as: 
+For implementation in JAGS, we specified the double exponential distribution as the prior distribution for all block-level variables as: 
 
-# 'beta.block[i] ~ ddexp(0, lambda)' (see model code above), where lambda was the prior variance value for each realization of the model. 
+'beta.block[i] ~ ddexp(0, lambda)' (see model code above), where lambda was the prior variance value for each realization of the model. 
 
 
 

@@ -49,21 +49,7 @@ We will run this example on a small amount of data, using Ovenbird
 
 ``` r
 library(tidyverse)
-```
 
-    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-    ## ✔ dplyr     1.1.2     ✔ readr     2.1.4
-    ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-    ## ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-    ## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-    ## ✔ purrr     1.0.2     
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## ✖ dplyr::filter()     masks stats::filter()
-    ## ✖ dplyr::group_rows() masks kableExtra::group_rows()
-    ## ✖ dplyr::lag()        masks stats::lag()
-    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-
-``` r
 # Load the data
 load("docs/big-grid-zenodo-data.Rdata")
 
@@ -90,11 +76,7 @@ block.test <- blocks_veghf_2[[scale]][test, ]
 
 pt.test <- point.block[[scale]][which(point.block[[scale]]$block %in% block.test$blockID), ]
 length(which(duplicated(pt.test$ss))) #Make sure there are no duplicates
-```
 
-    ## [1] 2
-
-``` r
 # Get the dominant vegetation and weighted mean forest age for each point
 pt_cov.test <- do.call(rbind, lapply(1:nlevels(as.factor(pt.test$block)), function(x){
   d <- pt.test[which(pt.test$block == levels(as.factor(pt.test$block))[x]), ]
@@ -118,11 +100,8 @@ spp.test <- do.call(rbind, lapply(1:nrow(pt_cov.test), function(x) spp_pt[which(
 
 nsurv.test <- do.call(rbind, lapply(1:nrow(pt_cov.test), function(x) bg_nsurv_veg[which(bg_nsurv_veg$SS == pt_cov.test$ss[x]), ]))
 all.equal(nsurv.test$SS, pt_block.test$ss) # Make sure the data mathces up
-```
 
-    ## [1] TRUE
 
-``` r
 # Get the human footprint data for the blocks included in the analysis
 block_cov.test <- as.matrix(block.test[, grep("seismic|widelin|wells|industry", colnames(block.test))])
 
@@ -204,9 +183,11 @@ sink()
 
  
 
-# For implementation in JAGS, we specified the double exponential distribution as the prior distribution for all block-level variables as:
+For implementation in JAGS, we specified the double exponential
+distribution as the prior distribution for all block-level variables as:
 
-# ‘beta.block\[i\] ~ ddexp(0, lambda)’ (see model code above), where lambda was the prior variance value for each realization of the model.
+‘beta.block\[i\] ~ ddexp(0, lambda)’ (see model code above), where
+lambda was the prior variance value for each realization of the model.
 
 ## Bayesian Lasso implementation
 
