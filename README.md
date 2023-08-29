@@ -7,8 +7,6 @@ run, the scale integrated occupancy model described in Crosby et al.
 
 ## Importing the Big Grid data
 
-# **Appendix B: Hierarchical model code and details on Bayesian Lasso**
-
  
 
 ## Hierarchical model code
@@ -78,12 +76,6 @@ cat("
 
  
 
-## **Details on Bayesian Lasso implementation**
-
-# We implemented the Bayesian Lasso procedure for each model type (additive, interactive, and total human footprint) at each scale using all coefficients and interactions on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. ([2015](#ref-gerber2015)) and Stevens and Conway ([2019](#ref-Stevens2019)), we searching over 50 potential values of prior variance for the Laplace distribution ranging from 0.1–5 on the log scale, which translated to ~1.1–148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion (WAIC, [Watanabe 2010](#ref-watanabe2010)).
-
- 
-
 # For implementation in JAGS, we specified the double exponential distribution as the prior distribution for all block-level variables as:
 
 # ‘beta.block\[i\] ~ ddexp(0, lambda)’ (see model code above), where lambda was the prior variance value for each realization of the model.
@@ -98,6 +90,24 @@ lam \<- as.numeric() \# Which lamdba value to choose (1-50)
 mod.lam \<- lambda\[lam\]
 
  
+
+## Bayesian Lasso implementation
+
+ 
+
+## **Details on Bayesian Lasso implementation**
+
+We implemented the Bayesian Lasso procedure for each model type
+(additive, interactive, and total human footprint) at each scale using
+all coefficients and interactions on the block-level portion of the
+model, with specific variables depending on which model type was being
+estimated. Similar to Gerber et al. ([2015](#ref-gerber2015)) and
+Stevens and Conway ([2019](#ref-Stevens2019)), we searching over 50
+potential values of prior variance for the Laplace distribution ranging
+from 0.1–5 on the log scale, which translated to ~1.1–148 when
+transformed. We selected the optimal prior for each model type at each
+scale by comparing models using Watanabe-Akaike Information Criterion
+(WAIC, [Watanabe 2010](#ref-watanabe2010)).  
 
 ## References
 
