@@ -7,7 +7,6 @@ fig_caption: yes
 
 ---
 
-
 \ 
 
 This is Appendix B from the manuscript "Domains of scale in cumulative effects of energy sector development on boreal birds" by @Crosby. submitted to the journal *Landscape Ecology*. The objective of this document is to describe, and demonstrate how to run, the scale integrated occupancy model using Bayesian lasso for variable selection. 
@@ -23,11 +22,9 @@ This is Appendix B from the manuscript "Domains of scale in cumulative effects o
 
 ### Files:  
 
-* **big-grid-point-data.Rdata**: point-level habitat data and bird detections, and survey-level detection variables. 
+* **big-grid-zenodo-data.Rdata**: Post-processed data used to fit the models in this analysis 
 
-* **big-grid-block-data.Rdata**: block-level human footprint data. 
+These data can be downloaded from the Zenodo repository at: 
 
-These data can be downloaded form the Zenodo repository at: 
-
-
+To be consistent with the GitHub repository (), when following this tutorial in R, create a directory named "docs" within your R working directory to store the data in. 
 
