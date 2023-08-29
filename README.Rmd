@@ -1,0 +1,57 @@
+---
+title: "Running a scale-integrated occupancy model with Bayesian lasso for variable selection."
+author: "Andrew D. Crosby"
+site: bookdown::bookdown_site
+output: 
+  md_document:
+    variant: gfm
+    toc: FALSE
+    toc_depth: 2
+    number_sections: FALSE
+bibliography: docs/scale-integration-library.json
+citation-style: docs/landscape-ecology.csl
+
+link-citations: true
+github-repo: https://github.com/crosbya1/scale-integrated-occupancy.git
+description: "Description and code for running a scale-integrated occupancy model with Bayesian Lasso for variable selection"
+---
+
+```{r GlobalOptions, echo=FALSE}
+options(bookdown.render.file_scope = FALSE, knitr.duplicate.label = "allow") 
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+```
+
+```{r setup, include=FALSE, cache=FALSE}
+#Set root directory to R project root
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+```
+
+```{r echo=FALSE, out.width = '100%'}
+library(kableExtra)
+library(knitr)
+```
+
+# Running a scale-integrated occupancy model with Bayesian lasso for variable selection
+
+## Overview
+The Objective of this document is to describe, and demonstrate how to run, the scale integrated occupancy model described in @Crosby. 
+
+
+
+## Importing the Big Grid data
+```{r child = 'docs/R/hierarchical-model-code.Rmd'}
+```
+
+## Bayesian Lasso implementation
+```{r child = 'docs/R/lasso-implementation.Rmd'}
+```
+## References
+
+
+<div id="refs"></div>
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
