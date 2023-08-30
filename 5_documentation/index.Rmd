@@ -45,15 +45,15 @@ Andrew D. Crosby, Lionel Leston, Erin M. Bayne, Péter Sólymos, C. Lisa Mahon, 
 
 
 ## Importing and processing the Big Grid data 
-```{r child = 'docs/R/data-processing.Rmd'}
+```{r child = 'docs/R/02_data-processing.Rmd'}
 ```
 
 ## Description of model code 
-```{r child = 'docs/R/hierarchical-model-code.Rmd'}
+```{r child = 'docs/R/03_hierarchical-model-code.Rmd'}
 ```
 
 ## Bayesian Lasso implementation 
-```{r child = 'docs/R/lasso-implementation.Rmd'}
+```{r child = 'docs/R/04_lasso-implementation.Rmd'}
 ```
 
 ## References

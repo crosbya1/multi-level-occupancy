@@ -37,7 +37,6 @@ test <- sort(sample(1:nrow(blocks_veghf_2[[scale]]), nblock, replace = FALSE))
 block.test <- blocks_veghf_2[[scale]][test, ]
 
 pt.test <- point.block[[scale]][which(point.block[[scale]]$block %in% block.test$blockID), ]
-length(which(duplicated(pt.test$ss))) #Make sure there are no duplicates
 
 # Get the dominant vegetation and weighted mean forest age for each point
 pt_cov.test <- do.call(rbind, lapply(1:nlevels(as.factor(pt.test$block)), function(x){

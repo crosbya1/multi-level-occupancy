@@ -75,7 +75,6 @@ test <- sort(sample(1:nrow(blocks_veghf_2[[scale]]), nblock, replace = FALSE))
 block.test <- blocks_veghf_2[[scale]][test, ]
 
 pt.test <- point.block[[scale]][which(point.block[[scale]]$block %in% block.test$blockID), ]
-length(which(duplicated(pt.test$ss))) #Make sure there are no duplicates
 
 # Get the dominant vegetation and weighted mean forest age for each point
 pt_cov.test <- do.call(rbind, lapply(1:nlevels(as.factor(pt.test$block)), function(x){
@@ -228,7 +227,7 @@ block.cov <- data.frame(total.hf = rowSums(block_cov.test))
 # Create the block-level model matrix
 cov.block <- model.matrix(~ ., data = data.frame(block.cov))
 
-# Create teh point-level model matrix, with forest age scaled 
+# Create the point-level model matrix, with forest age scaled 
 pt.cov <- data.frame(age = scale(pt_cov.test$age), pt_cov.test[, grep("dom", colnames(pt_cov.test))])
 cov.point <- model.matrix(~ as.matrix(pt.cov))
 
@@ -251,7 +250,7 @@ nt <- 1
 nc <- 3
 
 
-mod.lam <- lambda[i]  # The lambda value to use
+mod.lam <- lambda[1]  # The lambda value to use
 
 
 params_1 <- c("beta.block", "beta.point", "beta.p", "l.score", "lprob.y")
