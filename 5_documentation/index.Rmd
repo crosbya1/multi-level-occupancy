@@ -9,7 +9,7 @@ output:
     toc_depth: 2
     number_sections: FALSE
 bibliography: docs/scale-integration-library.json
-citation-style: docs/landscape-ecology.csl
+citation-style: docs/journal-of-applied-ecology.csl
 
 link-citations: true
 github-repo: https://github.com/crosbya1/scale-integrated-occupancy.git

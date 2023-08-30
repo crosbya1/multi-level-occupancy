@@ -13,18 +13,19 @@ Mahon, Judith D. Toms, Teegan D.S. Docherty, Samantha J. Song
 
 This is Appendix B from the manuscript “Domains of scale in cumulative
 effects of energy sector development on boreal birds” by Crosby et al.
-submitted to the journal *Landscape Ecology*. The objective of this
-document is to describe, and demonstrate how to run, the scale
-integrated occupancy model using Bayesian lasso for variable selection.
+([n.d.](#ref-Crosby)). submitted to the journal *Landscape Ecology*. The
+objective of this document is to describe, and demonstrate how to run,
+the scale integrated occupancy model using Bayesian lasso for variable
+selection.
 
 ### Software requirements:
 
 - R for downloading and processing data, and running the models ([R Core
-  Development Team 2017](#ref-RCoreTeam2017)), downloadable from
+  Development Team, 2017](#ref-RCoreTeam2017)), downloadable from
   <https://www.r-project.org/>
 
 - JAGS for estimating model parameters using Markov chain Monte
-  Carlo (MCMC) through the use of a Gibbs sampler ([Plummer
+  Carlo (MCMC) through the use of a Gibbs sampler ([Plummer,
   2003](#ref-Plummer2013)), downloadable from
   <https://mcmc-jags.sourceforge.io/>
 
@@ -202,7 +203,7 @@ which model type was being estimated. Similar to Gerber et al.
 prior variance for the Laplace distribution ranging from 0.1–5 on the
 log scale, which translated to ~1.1–148 when transformed. We selected
 the optimal prior for each model type at each scale by comparing models
-using Watanabe-Akaike Information Criterion (WAIC, [Watanabe
+using Watanabe-Akaike Information Criterion (WAIC, [Watanabe,
 2010](#ref-watanabe2010)).
 
  
@@ -301,53 +302,58 @@ lasso_scores <- lapply(1:length(lambda), function(i){
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+line-spacing="2">
 
 <div id="ref-Crosby" class="csl-entry">
 
-Crosby AD, Leston L, Bayne EM, et al Domains of scale in cumulative
-effects of energy sector development on boreal birds.
+Crosby, A. D., Leston, L., Bayne, E. M., Sólymos, P., Mahon, C. L.,
+Toms, J. D., Docherty, T. D. S., & Song, S. J. (n.d.). *Domains of scale
+in cumulative effects of energy sector development on boreal birds*.
 https://doi.org/<https://doi.org/10.21203/rs.3.rs-2191857/v1>
 
 </div>
 
 <div id="ref-gerber2015" class="csl-entry">
 
-Gerber BD, Kendall WL, Hooten MB, et al (2015) Optimal population
-prediction of sandhill crane recruitment based on climate-mediated
-habitat limitations. Journal of Animal Ecology 84:1299–1310.
+Gerber, B. D., Kendall, W. L., Hooten, M. B., Dubovsky, J. A., &
+Drewien, R. C. (2015). Optimal population prediction of sandhill crane
+recruitment based on climate-mediated habitat limitations. *Journal of
+Animal Ecology*, *84*(5), 1299–1310.
 <https://doi.org/10.1111/1365-2656.12370>
 
 </div>
 
 <div id="ref-Plummer2013" class="csl-entry">
 
-Plummer M (2003) [JAGS: Just another gibbs
-sampler](http://mcmc-jags.sourceforge.net/)
+Plummer, M. (2003). *JAGS: Just another gibbs sampler*.
+<http://mcmc-jags.sourceforge.net/>
 
 </div>
 
 <div id="ref-RCoreTeam2017" class="csl-entry">
 
-R Core Development Team (2017) [R: A language and environment for
-statistical computing](https://www.r-project.org/). R Foundation for
-Statistical Computing
+R Core Development Team. (2017). *R: A language and environment for
+statistical computing*. R Foundation for Statistical Computing.
+<https://www.r-project.org/>
 
 </div>
 
 <div id="ref-Stevens2019" class="csl-entry">
 
-Stevens BS, Conway CJ (2019) Predicting species distributions: unifying
-model selection and scale optimization for multi‐scale occupancy models.
-Ecosphere 10:e02748. <https://doi.org/10.1002/ecs2.2748>
+Stevens, B. S., & Conway, C. J. (2019). Predicting species
+distributions: unifying model selection and scale optimization for
+multi‐scale occupancy models. *Ecosphere (Washington, D.C)*, *10*(5),
+e02748. <https://doi.org/10.1002/ecs2.2748>
 
 </div>
 
 <div id="ref-watanabe2010" class="csl-entry">
 
-Watanabe S (2010) [Asymptotic Equivalence of Bayes Cross Validation and
-Widely Applicable Information Criterion in Singular Learning
-Theory](https://www.jmlr.org/papers/volume11/watanabe10a/watanabe10a.pdf)
+Watanabe, S. (2010). *Asymptotic Equivalence of Bayes Cross Validation
+and Widely Applicable Information Criterion in Singular Learning
+Theory*.
+<https://www.jmlr.org/papers/volume11/watanabe10a/watanabe10a.pdf>
 
 </div>
 
