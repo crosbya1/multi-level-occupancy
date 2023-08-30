@@ -1,4 +1,4 @@
-# Appendix B: Running a scale-integrated occupancy model with Bayesian lasso for variable selection
+# Appendix B: Running a multi-level occupancy model with Bayesian lasso for variable selection
 
 Supporting information for:  
 Domains of scale in cumulative effects of energy sector development on
