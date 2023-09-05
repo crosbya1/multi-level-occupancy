@@ -22,9 +22,9 @@ This is Appendix B from the manuscript "Domains of scale in cumulative effects o
 
 ### Files:  
 
-* **big-grid-zenodo-data.Rdata**: Post-processed data used to fit the models in this analysis 
+* **big-grid-data.Rdata**: Post-processed data used to fit the models in this analysis 
 
-These data can be downloaded from the Zenodo repository at: 
+  - These data can be downloaded from the Github repository at: [big-grid-data.Rdata](https://github.com/crosbya1/multi-level-occupancy/blob/main/docs/big-grid-data.Rdata)
 
-To be consistent with the GitHub repository (), when following this tutorial in R, create a directory named "docs" within your R working directory to store the data in. 
+To be consistent with the [GitHub repository](https://github.com/crosbya1/multi-level-occupancy), when following this tutorial in R, create a directory named "docs" within your R working directory to store the data in. 
 

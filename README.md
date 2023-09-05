@@ -34,14 +34,16 @@ selection.
 
 ### Files:
 
-- **big-grid-zenodo-data.Rdata**: Post-processed data used to fit the
-  models in this analysis
+- **big-grid-data.Rdata**: Post-processed data used to fit the models in
+  this analysis
 
-These data can be downloaded from the Zenodo repository at:
+  - These data can be downloaded from the Github repository at:
+    [big-grid-data.Rdata](https://github.com/crosbya1/multi-level-occupancy/blob/main/docs/big-grid-data.Rdata)
 
-To be consistent with the GitHub repository (), when following this
-tutorial in R, create a directory named “docs” within your R working
-directory to store the data in.
+To be consistent with the [GitHub
+repository](https://github.com/crosbya1/multi-level-occupancy), when
+following this tutorial in R, create a directory named “docs” within
+your R working directory to store the data in.
 
 ## Importing and processing the Big Grid data
 
@@ -200,13 +202,11 @@ block-level portion of the model, with specific variables depending on
 which model type was being estimated. Similar to Gerber et al.
 ([2015](#ref-gerber2015)) and Stevens and Conway
 ([2019](#ref-Stevens2019)), we searched over 50 potential values of
-prior variance for the Laplace distribution ranging from 0.1–5 on the
+prior precision for the Laplace distribution ranging from 0.1–5 on the
 log scale, which translated to ~1.1–148 when transformed. We selected
 the optimal prior for each model type at each scale by comparing models
 using Watanabe-Akaike Information Criterion (WAIC, [Watanabe,
 2010](#ref-watanabe2010)).
-
- 
 
 For this demonstration, we will limit the lasso implementation to 10
 values of the prior variance, as the models are run separately for each
