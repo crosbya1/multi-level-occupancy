@@ -8,11 +8,8 @@ fig_caption: yes
 ---
 \     
 
-
 ### **Details on Bayesian Lasso implementation**     
-We implemented the Bayesian Lasso procedure for coefficients on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. [-@gerber2015] and Stevens and Conway [-@Stevens2019], we searched over 50 potential values of prior variance for the Laplace distribution ranging from 0.1--5 on the log scale, which translated to ~1.1--148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion [WAIC, @watanabe2010].  
-
-\  
+We implemented the Bayesian Lasso procedure for coefficients on the block-level portion of the model, with specific variables depending on which model type was being estimated. Similar to Gerber et al. [-@gerber2015] and Stevens and Conway [-@Stevens2019], we searched over 50 potential values of prior precision for the Laplace distribution ranging from 0.1--5 on the log scale, which translated to ~1.1--148 when transformed. We selected the optimal prior for each model type at each scale by comparing models using Watanabe-Akaike Information Criterion [WAIC, @watanabe2010].   
   
 For this demonstration, we will limit the lasso implementation to 10 values of the prior variance, as the models are run separately for each value of the variance. For simplicity, we will use total human footprint as the only block-level covariate. In the full analysis, these models were run in parallel on a high performance computing system (Digital Research Alliance of Canada, formerly Compute Canada). 
 
