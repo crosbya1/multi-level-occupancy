@@ -54,7 +54,7 @@ We will run this example on a small amount of data, using Ovenbird
 library(tidyverse)
 
 # Load the data
-load("docs/big-grid-zenodo-data.Rdata")
+load("docs/big-grid-data.Rdata")
 
 # Select the species
 spp_code <- "OVEN" 
