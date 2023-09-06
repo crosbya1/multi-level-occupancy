@@ -44,6 +44,7 @@ lambda <- exp(log.lambda)
 
 First, run a single model with the lowest lambda value
 ```{r, eval = F, message = F, warning = F}
+scale <- 2
 ni <- 1000
 nb <- 500
 nt <- 1
